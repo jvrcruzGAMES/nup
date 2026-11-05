@@ -19,12 +19,22 @@ content metadata - and strip everything that requires keys:
 Extra things that will exist in v2:
 
 - update dumps for games will be diffed and only the diff stored
- so it can be applied to the base (this might be an issue with games
- we dont have the base of, in those cases, store update as base(?))
+ so it can be applied to the exact matching base. If the base folder is absent
+ or empty, each complete prepatched update snapshot is packaged as a base game
+ instead, with no patch dependency. Each DLC is a separate NUP file.
+- application metadata belongs to base NUPs; update and DLC NUPs retain an empty
+ metadata section.
+
+## Specification and loading
+
+- [SPEC.md](SPEC.md): v2 wire format, separate base/update/DLC files, exact-base
+  deltas, metadata ownership, promoted prepatched dumps, and v1 distinction.
+- [EMULATOR_INTEGRATION.md](EMULATOR_INTEGRATION.md): proposed Eglantine loading
+  instructions; no loader implementation yet.
 
 ## Status
 
-Designing.
+Design draft. v2 uses `NUP\x02`; v1 retains `NUP\x01`.
 
 ## v1
 
